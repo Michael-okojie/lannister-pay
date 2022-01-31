@@ -12,8 +12,8 @@ An NGN (Nigerian Naira) fee processing service for a fictional Payment Processor
 -   `cp .env.example .env` to create a **.env** file for environment variables
 -   Update the .env file with the respective environment variables
 -   `npm run dev` to start development server
--   On postman/postwoman/insomnia/etc, run the server endpoints, `http://localhost:8080/api/v1/...`
-
+-   On postman/postwoman/insomnia/etc, run the server endpoints, `http://localhost:8080/...`
+- using the staging server on heroku `https://lannister-pay.herokuapp.com/...`
 #### Using docker
 
 -   Build the application by running the following command
@@ -43,4 +43,4 @@ Checkout the `.env.example` file and create a copy of it in a `.env` file, or re
 -   Express JS
 
 ## 📋 Documentation
-Link [here](https://documenter.getpostman.com/)
+Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)
