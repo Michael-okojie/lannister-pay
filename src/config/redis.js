@@ -1,10 +1,14 @@
 import { createClient } from "redis";
-import { REDIS_PORT, REDIS_HOST, REDIS_PASSWORD } from "./keys";
+import { REDIS_PORT, REDIS_HOST, REDIS_PASSWORD, REDIS_URL } from "./keys";
+
+// const client = createClient({
+//   host: REDIS_HOST,
+//   port: REDIS_PORT,
+//   password: REDIS_PASSWORD,
+// });
 
 const client = createClient({
-  host: REDIS_HOST,
-  port: REDIS_PORT,
-  password: REDIS_PASSWORD,
+  url: REDIS_URL,
 });
 
 (async () => {
