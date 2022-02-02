@@ -57,11 +57,6 @@ class DbModule {
 
   async readFileContent() {
     try {
-      // first check if it exists in memory
-      const records = this.getDataInMemory();
-      if (records.length > 0) {
-        return records;
-      }
       // Read filecontents of the datastore
       const jsonRecords = await promises.readFile(this.filename, {
         encoding: "utf8",
@@ -76,6 +71,11 @@ class DbModule {
   }
 
   async find() {
+    // first check if it exists in memory
+    const records = this.getDataInMemory();
+    if (records.length > 0) {
+      return records;
+    }
     return await this.readFileContent();
   }
 }
