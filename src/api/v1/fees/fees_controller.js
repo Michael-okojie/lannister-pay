@@ -184,9 +184,7 @@ export async function setUpFeeConfigurationJson(req, res, next) {
         new CustomError(400, "Fee configurations set up wasn't successful. Try again")
       );
     }
-
-    console.log("jjjj", savedConfig)
-
+    
     return res.status(200).json({
       status: "OK",
     });

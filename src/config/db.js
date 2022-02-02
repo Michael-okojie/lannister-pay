@@ -2,6 +2,7 @@ import { writeFile, promises, constants } from "fs";
 class DbModule {
   constructor(filename = "db.json") {
     this.filename = filename;
+    this.dataInMemory = []; // array of hash maps
   }
 
   // returns a promise which resolves true if file is not written:
@@ -44,11 +45,23 @@ class DbModule {
 
   // to set fee configurations
   async setData(data) {
+    // update the fee configuration in memory
+    this.dataInMemory = data;
+    // write the configuration to file
     return await this.writeToFile(this.filename, JSON.stringify(data, null, 2));
+  }
+
+  getDataInMemory() {
+    return this.dataInMemory;
   }
 
   async readFileContent() {
     try {
+      // first check if it exists in memory
+      const records = this.getDataInMemory();
+      if (records.length > 0) {
+        return records;
+      }
       // Read filecontents of the datastore
       const jsonRecords = await promises.readFile(this.filename, {
         encoding: "utf8",
@@ -65,7 +78,6 @@ class DbModule {
   async find() {
     return await this.readFileContent();
   }
-
 }
 
 export default new DbModule("feeConfig.json");
