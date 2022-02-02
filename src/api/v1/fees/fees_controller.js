@@ -42,16 +42,6 @@ export async function setUpFeeConfiguration(req, res, next) {
     // store the data in redis
     await client.set("feeConfigurations", JSON.stringify(data));
 
-    // data.forEach(async (dt, index) => {
-    //   await client.hSet(`${index}`, "feeId", dt["feeId"]);
-    //   await client.hSet(`${index}`, "feeCurrency", dt["feeCurrency"]);
-    //   await client.hSet(`${index}`, "feeLocale", dt["feeLocale"]);
-    //   await client.hSet(`${index}`, "feeEntity", dt["feeEntity"]);
-    //   await client.hSet(`${index}`, "entityProperty", dt["entityProperty"]);
-    //   await client.hSet(`${index}`, "feeType", dt["feeType"]);
-    //   await client.hSet(`${index}`, "feeValue", dt["feeValue"]);
-    // });
-
     return res.status(200).json({
       status: "OK",
     });
@@ -122,7 +112,7 @@ export async function computeFee(req, res, next) {
 
     const flatPercFeeValue =
       matched.feeType == "FLAT_PERC" && matched.feeValue.split(":");
-    console.log("ll", typeof flatPercFeeValue[0]);
+
     const appliedFeeValue =
       matched.feeType === "FLAT"
         ? Number.parseFloat(matched.feeValue)

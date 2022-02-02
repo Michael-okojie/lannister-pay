@@ -4,7 +4,6 @@ import morgan from "morgan";
 import helmet from "helmet";
 import apiRoute from "./routes";
 import errorHandler from "./utils/errorHandler";
-import responseHandler from "./utils/responseHandler";
 
 const app = express();
 
@@ -15,7 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  return responseHandler(res, 200, "Welcome to Lannister Pay API");
+  return res.status(200).json({
+    message: "Welcome to Lannister Pay API",
+  });
 });
 
 apiRoute(app);
