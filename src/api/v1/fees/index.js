@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { setUpFeeConfiguration, computeFee } from "./fees_controller";
+import { setUpFeeConfiguration, computeFee, setUpFeeConfigurationJson, computeFeeJson } from "./fees_controller";
 
 const router = Router();
 
@@ -14,5 +14,11 @@ router.post("/fees", setUpFeeConfiguration);
  * /compute-transaction-fee - POST
  */
 router.post("/compute-transaction-fee", computeFee);
+
+
+// testing endpoint with fs module
+router.post("/json-fees", setUpFeeConfigurationJson)
+
+router.post("/json-compute-transaction-fee", computeFeeJson)
 
 export default router;
