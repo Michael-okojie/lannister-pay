@@ -4,7 +4,13 @@
   "description": "An NGN (Nigerian Naira) fee processing service for a fictional Payment Processor (LannisterPay)",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --verbose",
+    "test:watch": "cross-env NODE_ENV=test jest --watch --verbose",
+    "test:ci": "cross-env NODE_ENV=test jest --coverage --verbose &&  cat ./coverage/lcov.info | coveralls",
+    "test:codacy": "cross-env NODE_ENV=test jest --coverage --verbose &&  cat ./coverage/lcov.info | codacy-coverage",
+    "test:cover": "cross-env NODE_ENV=test jest --coverage --verbose",
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint --fix \"src/**/*.js\"",
     "dev": "nodemon --exec babel-node src/server.js",
     "start": "node dist/server.js",
     "build": "babel ./src -d dist --copy-files",
@@ -31,9 +37,9 @@
   "dependencies": {
     "@babel/runtime": "^7.16.7",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "express-validator": "^6.14.0",
     "helmet": "^5.0.2",
     "morgan": "^1.10.0",
     "redis": "^4.0.2"
@@ -44,6 +50,16 @@
     "@babel/node": "^7.16.8",
     "@babel/plugin-transform-runtime": "^7.16.10",
     "@babel/preset-env": "^7.16.11",
-    "nodemon": "^2.0.15"
+    "babel-jest": "^27.5.0",
+    "codacy-coverage": "^3.4.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "sinon": "^13.0.1",
+    "supertest": "^6.2.2"
   }
 }

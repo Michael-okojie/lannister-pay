@@ -1,6 +1,14 @@
 # Lannister Pay
 An NGN (Nigerian Naira) fee processing service for a fictional Payment Processor (LannisterPay)
 
+## 📋 Documentation
+Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)
+
+## 🛠 Tools & Technology
+- Nodejs
+- Express JS
+- File based Database System with in-memory data
+
 ## 🖇 How to Start
 
 -   Git clone `git clone https://github.com/neymarjimoh/lanister-pay`
@@ -14,22 +22,8 @@ An NGN (Nigerian Naira) fee processing service for a fictional Payment Processor
 -   `npm run dev` to start development server
 -   On postman/postwoman/insomnia/etc, run the server endpoints, `http://localhost:8080/...`
 - using the staging server on heroku `https://lannister-pay.herokuapp.com/...`
-#### Using docker
-
--   Build the application by running the following command
-
-```
-  docker-compose build
-```
-
--   Run your dockerized app, just execute the command below
-
-```
-  docker-compose up
-```
-
--   The application should now be running on the `port 4040`
--   Navigate to postman to test the APIs out on `http://localhost:4040/api/v1/...`
+- `npm run test` to run all test suites
+- `npm run lint:fix` to fix all linting issues
 
 ## `.env` Credentials
 
@@ -39,8 +33,5 @@ Checkout the `.env.example` file and create a copy of it in a `.env` file, or re
 ## 🛠 Tools
 
 -   Node JS
--   Redis
+-  Nodejs' FS module
 -   Express JS
-
-## 📋 Documentation
-Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { setUpFeeConfiguration, computeFee } from "./fees_controller";
+import { setUpFeeConfigurationJson, computeFeeJson } from "./fees_controller";
 
 const router = Router();
 
@@ -7,12 +7,12 @@ const router = Router();
  * to set up fees
  * /fees - POST
  */
-router.post("/fees", setUpFeeConfiguration);
+router.post("/fees", setUpFeeConfigurationJson);
 
 /**
  * fee computation endpoint
  * /compute-transaction-fee - POST
  */
-router.post("/compute-transaction-fee", computeFee);
+router.post("/compute-transaction-fee", computeFeeJson);
 
 export default router;

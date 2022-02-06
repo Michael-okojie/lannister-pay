@@ -1,7 +1,7 @@
 import { InternalServerError, CustomError } from "../../../utils/customError";
-import client from "../../../config/redis";
+import DbModule from "../../../config/db";
 
-export async function setUpFeeConfiguration(req, res, next) {
+export async function setUpFeeConfigurationJson(req, res, next) {
   try {
     const { FeeConfigurationSpec } = req.body;
 
@@ -39,8 +39,16 @@ export async function setUpFeeConfiguration(req, res, next) {
       };
     });
 
-    // store the data in redis
-    await client.set("feeConfigurations", JSON.stringify(data));
+    // store the item in DB
+    const savedConfig = await DbModule.setData(data);
+    if (!savedConfig) {
+      return next(
+        new CustomError(
+          400,
+          "Fee configurations set up wasn't successful. Try again"
+        )
+      );
+    }
 
     return res.status(200).json({
       status: "OK",
@@ -53,7 +61,7 @@ export async function setUpFeeConfiguration(req, res, next) {
 const countOccurrences = (arr, val) =>
   arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
-export async function computeFee(req, res, next) {
+export async function computeFeeJson(req, res, next) {
   try {
     const { Amount, Currency, CurrencyCountry, Customer, PaymentEntity } =
       req.body;
@@ -72,26 +80,28 @@ export async function computeFee(req, res, next) {
       });
     }
 
-    const feeConfigurations = await client.get("feeConfigurations");
+    // get data from file system DbModule
+    const feeConfigurations = await DbModule.find();
+    if (feeConfigurations.length === 0) {
+      return next(new CustomError(404, "No fee Configurations set yet"));
+    }
 
     const feeCurrency = Currency; // can accept *
     const feeLocale = CurrencyCountry === Country ? "LOCL" : "INTL"; // can accept *
     const feeEntity = Type; // can accept *
 
-    const matchedFeeConfigurations = JSON.parse(feeConfigurations).filter(
-      (feeConfig) => {
-        return (
-          (feeConfig.feeCurrency == feeCurrency ||
-            feeConfig.feeCurrency == "*") &&
-          (feeConfig.feeLocale == feeLocale || feeConfig.feeLocale == "*") &&
-          (feeConfig.feeEntity == feeEntity || feeConfig.feeEntity == "*") &&
-          (feeConfig.entityProperty == Issuer ||
-            feeConfig.entityProperty == Brand ||
-            feeConfig.entityProperty == PaymentEntityNumber ||
-            feeConfig.entityProperty == "*")
-        );
-      }
-    );
+    const matchedFeeConfigurations = feeConfigurations.filter((feeConfig) => {
+      return (
+        (feeConfig.feeCurrency == feeCurrency ||
+          feeConfig.feeCurrency == "*") &&
+        (feeConfig.feeLocale == feeLocale || feeConfig.feeLocale == "*") &&
+        (feeConfig.feeEntity == feeEntity || feeConfig.feeEntity == "*") &&
+        (feeConfig.entityProperty == Issuer ||
+          feeConfig.entityProperty == Brand ||
+          feeConfig.entityProperty == PaymentEntityNumber ||
+          feeConfig.entityProperty == "*")
+      );
+    });
 
     let matched;
     if (matchedFeeConfigurations.length == 0) {
