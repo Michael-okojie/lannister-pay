@@ -33,5 +33,5 @@ Checkout the `.env.example` file and create a copy of it in a `.env` file, or re
 ## 🛠 Tools
 
 -   Node JS
--   Redis
+-  Nodejs' FS module
 -   Express JS
