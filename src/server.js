@@ -64,7 +64,6 @@ const startServer = () => {
 try {
   startServer();
   dbConnect.connectDB();
-
 } catch (error) {
   // handle errors here
   log(error.message);

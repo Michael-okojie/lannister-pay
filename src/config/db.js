@@ -78,6 +78,12 @@ class DbModule {
     }
     return await this.readFileContent();
   }
+
+  // for test purposes to clear all test data
+  async clean() {
+    this.dataInMemory = [];
+    await this.writeToFile(this.filename, "[]");
+  }
 }
 
 export default new DbModule("feeConfig.json");
