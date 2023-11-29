@@ -21,7 +21,7 @@ Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)
 -   Update the .env file with the respective environment variables
 -   `npm run dev` to start development server
 -   On postman/postwoman/insomnia/etc, run the server endpoints, `http://localhost:8080/...`
-- using the staging server on heroku `https://lannister-pay.herokuapp.com/...`
+- using the staging server on heroku `https://lanister-pay.onrender.com/...`
 - `npm run test` to run all test suites
 - `npm run lint:fix` to fix all linting issues
 
