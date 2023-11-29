@@ -11,7 +11,7 @@ Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)
 
 ## 🖇 How to Start
 
--   Git clone `git clone https://github.com/neymarjimoh/lanister-pay`
+-   Git clone `git clone https://github.com/Micael-okojie/lanister-pay`
 -   cd `lanister-pay`
 
 #### Local setup
@@ -27,7 +27,7 @@ Link [here](https://documenter.getpostman.com/view/8239792/UVeDsSxG)
 
 ## `.env` Credentials
 
-Checkout the `.env.example` file and create a copy of it in a `.env` file, or reach out to [@me](mailto:jemohkunle2007@gmail.com) to get started.
+Checkout the `.env.example` file and create a copy of it in a `.env` file, or reach out to [@me](mailto:michaelokojie1@gmail.com) to get started.
 
 
 ## 🛠 Tools
